@@ -5,11 +5,11 @@ const rootPath = `${process.env.PIEHUB_HOST}:${process.env.PIEHUB_PORT}/api`;
 
 
 module.exports = {
-    async request(path, options = {}) {
+    async request(path, options = { method: 'GET' }) {
         const res = await fetch(rootPath + path, options);
         const json = await res.json();
-        
-        if (res.success) {
+
+        if (json.success) {
             return json.data;
         }
 
@@ -17,11 +17,11 @@ module.exports = {
     },
 
     async get(path) {
-        return await this.request(rootPath + path);
+        return await this.request(path);
     },
 
     async post(path, body) {
-        return await this.request(rootPath + path, {
+        return await this.request(path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ module.exports = {
     },
 
     async delete(path) {
-        return await this.request(rootPath + path, {
+        return await this.request(path, {
             method: 'DELETE',
         });
     }
