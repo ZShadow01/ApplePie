@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 
-const rootPath = `${PIEHUB_HOST}:${PIEHUB_PORT}/api`;
+const rootPath = `${process.env.PIEHUB_HOST}:${process.env.PIEHUB_PORT}/api`;
 
 
 module.exports = {

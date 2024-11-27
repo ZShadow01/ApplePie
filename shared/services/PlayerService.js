@@ -11,7 +11,7 @@ module.exports = {
     },
 
     async register(id, name) {
-        await PieHubClient.post('/player/register', {
+        return await PieHubClient.post('/player/register', {
             id,
             name
         });
