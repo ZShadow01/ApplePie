@@ -1,3 +1,5 @@
+const { BaseError } = require('../errors');
+
 require('dotenv').config();
 
 
@@ -13,7 +15,7 @@ module.exports = {
             return json.data;
         }
 
-        return { code: json.code, metadata: json.metadata };
+        throw new BaseError('An error occurred while making the API request', json.code, json.metadata);
     },
 
     async get(path) {
