@@ -16,7 +16,7 @@ module.exports = {
     async execute(interaction) {
         const name = interaction.options.getString('name');
 
-        await PlayerService.register(interaction.user.id, name);
+        console.log(await PlayerService.register(interaction.user.id, name));
 
         await interaction.reply('Registering... not really: ' + name);
     }
