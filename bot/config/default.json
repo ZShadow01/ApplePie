@@ -2,5 +2,6 @@
     "events_folder": "events",
     "commands_folder": "commands",
     "primary_colour": 14634831,
-    "success_colour": 1626907
+    "success_colour": 1626907,
+    "error_colour": 14158603
 }
