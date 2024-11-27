@@ -1,4 +1,5 @@
 const { Events } = require('discord.js');
+const handleCommandError = require('../utils/handleCommandError');
 
 
 module.exports = {
@@ -16,14 +17,7 @@ module.exports = {
         try {
             await command.execute(interaction);
         } catch (error) {
-            console.error(error);
-
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: 'An error occurred while executing the command.', ephemeral: true });
-                return;
-            }
-            
-            await interaction.reply({ content: 'An error occurred while executing the command.', ephemeral: true });
+            await handleCommandError(error, interaction)
         }
     }
 };
