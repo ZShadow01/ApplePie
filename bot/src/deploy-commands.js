@@ -1,10 +1,9 @@
 const { REST, Routes } = require('discord.js');
-const fs = require('fs');
 const path = require('path');
 
 require('dotenv').config();
 
-const getAllFiles = require('../utils/getAllFiles');
+const getAllFiles = require('./utils/getAllFiles');
 const { commands_folder } = require('../config/default.json');
 
 // Construct and prepare an instance of the REST module
