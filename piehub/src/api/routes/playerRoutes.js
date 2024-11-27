@@ -6,10 +6,12 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
     try {
+        console.log("Registering player");
         await PlayerRepository.create(req.body.id, req.body.name);
         
         res.json({ success: true });
     } catch (error) {
+        console.error(error);
         res.json({ success: false, code: error.code, metadata: error.metadata });
     }
 });
