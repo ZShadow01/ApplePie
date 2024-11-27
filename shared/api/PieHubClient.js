@@ -1,9 +1,12 @@
 require('dotenv').config();
 
 
+const rootPath = `${PIEHUB_HOST}:${PIEHUB_PORT}/api`;
+
+
 module.exports = {
     async request(path, options = {}) {
-        const res = await fetch(path, options);
+        const res = await fetch(rootPath + path, options);
         const json = await res.json();
         
         if (res.success) {
@@ -14,11 +17,11 @@ module.exports = {
     },
 
     async get(path) {
-        return await this.request(path);
+        return await this.request(rootPath + path);
     },
 
     async post(path, body) {
-        return await this.request(path, {
+        return await this.request(rootPath + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +31,7 @@ module.exports = {
     },
 
     async delete(path) {
-        return await this.request(path, {
+        return await this.request(rootPath + path, {
             method: 'DELETE',
         });
     }
