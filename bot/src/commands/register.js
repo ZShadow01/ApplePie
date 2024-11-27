@@ -10,11 +10,13 @@ module.exports = {
             option.setName('name')
                 .setDescription('The name of the player')
                 .setRequired(true)
-                .max_length(20)
+                .setMaxLength(20)
         ),
 
     async execute(interaction) {
         const name = interaction.options.getString('name');
+
+        await PlayerService.register(interaction.user.id, name);
 
         await interaction.reply('Registering... not really: ' + name);
     }
