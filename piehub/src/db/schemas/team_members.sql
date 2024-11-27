@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS team_members (
+    player_id BIGINT UNSIGNED NOT NULL,
+    team_id INT UNSIGNED NOT NULL,
+    joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (player_id) REFERENCES players (id),
+    FOREIGN KEY (team_id) REFERENCES teams (id) ON DELETE CASCADE
+);
