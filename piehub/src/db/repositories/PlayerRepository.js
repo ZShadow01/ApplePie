@@ -1,4 +1,4 @@
-const { PlayerNotRegisteredError, PlayerNotFoundError, DatabaseDuplicateEntryError, PlayerAlreadyRegisteredError, PlayerNameTakenError } = require('../../../../shared/errors');
+const { PlayerNotRegisteredError, PlayerNotFoundError, DatabaseDuplicateEntryError, PlayerAlreadyRegisteredError, PlayerNameTakenError, DatabaseError } = require('../../../../shared/errors');
 const db = require('../db');
 const PlayerModel = require('../models/PlayerModel');
 
@@ -40,12 +40,11 @@ module.exports = {
                     throw new PlayerAlreadyRegisteredError(id);
                 } else if (entry === 'name') {
                     throw new PlayerNameTakenError(name);
-                } else {
-                    console.error(error);
                 }
             }
 
-            throw error;
+            console.error(error);
+            throw new DatabaseError('An unexpected error occurred while registering a player');
         }
     }
 };
