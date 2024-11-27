@@ -2,7 +2,7 @@ const app = require('./app');
 const socketIO = require('socket.io');
 const http = require('http');
 const socketHandler = require('./socket');
-const db = require('./db/db');
+const { db } = require('./db');
 
 // Load the environment variables
 require('dotenv').config();
