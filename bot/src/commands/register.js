@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const PlayerService = require('../../../shared/services/PlayerService');
+const { primary_colour, success_colour } = require('../../config/default.json');
 
 
 module.exports = {
@@ -16,8 +17,17 @@ module.exports = {
     async execute(interaction) {
         const name = interaction.options.getString('name');
 
-        console.log(await PlayerService.register(interaction.user.id, name));
+        // Register the player in the database
+        await PlayerService.register(interaction.user.id, name);
 
-        await interaction.reply('Registering... not really: ' + name);
+        const embed = {
+            color: success_colour,
+            author: {
+                name: `Welcome ${name}! 🎉`
+            },
+            description: "Successfully registered as a player in the PieHub"
+        };
+
+        await interaction.reply({ embeds: [embed] });
     }
 };
