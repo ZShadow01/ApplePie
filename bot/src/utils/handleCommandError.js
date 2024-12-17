@@ -14,6 +14,10 @@ module.exports = async function handleCommandError(error, interaction) {
                 embed.description = 'You are already registered as a player';
                 break;
 
+            case 'PLAYER_NAME_TAKEN':
+                embed.description = `The name "${error.metadata.playerName}" is already taken`;
+                break;
+
             default:
                 embed.description = `An error occurred: ${error.code}`;
                 break;
