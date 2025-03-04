@@ -1,0 +1,25 @@
+{
+    "name": "applepie",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "bot:build": "cd bot && npm run build",
+        "bot:start": "cd bot && npm start",
+        "bot:deploy": "cd bot && npm run deploy"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.13.8",
+        "prettier": "^3.5.2",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7"
+    }
+}
