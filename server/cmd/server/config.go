@@ -1,6 +1,11 @@
 package main
 
-import "os"
+import (
+	"log"
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 type ServerConfig struct {
 	Port string
@@ -9,6 +14,12 @@ type ServerConfig struct {
 
 func LoadConfig() (*ServerConfig) {
 	// Load configuration from a file or environment variables
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	host := os.Getenv("HOST")
 	port := os.Getenv("PORT")
 
