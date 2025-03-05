@@ -1,6 +1,10 @@
 *.env*
 
-package-lock.json
-node_modules/
+# Ignore binaries
+*.exe
+*.out
+*.bin
 
+# Ignore dependency directories
 dist/
+node_modules/
