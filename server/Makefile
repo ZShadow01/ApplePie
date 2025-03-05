@@ -7,4 +7,4 @@ run:
 	go run main.go
 
 build:
-	go build -o bin/server$(EXT)
+	go build -o bin/server$(EXT) cmd/server/main.go cmd/server/config.go
