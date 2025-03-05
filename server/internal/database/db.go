@@ -20,6 +20,7 @@ func loadConfig() *mysql.Config {
 		log.Fatal(err)
 	}
 
+	// Create configuration object
 	return &mysql.Config {
 		User: os.Getenv("DB_USER"),
 		Passwd: os.Getenv("DB_PASSWORD"),
@@ -27,6 +28,7 @@ func loadConfig() *mysql.Config {
 		Addr: os.Getenv("DB_HOST"),
 		DBName: os.Getenv("DB_NAME"),
 		AllowNativePasswords: true,
+		ParseTime: true,
 	}
 }
 
@@ -34,8 +36,7 @@ func ConnectDB() {
 	// Load the database configuration
 	config := loadConfig()
 
-	fmt.Println(config.FormatDSN());
-
+	// Connect to the database
 	var err error
 	DB, err = sql.Open("mysql", config.FormatDSN())
 
@@ -43,6 +44,7 @@ func ConnectDB() {
 		log.Fatal(err)
 	}
 
+	// Check the database connection
 	pingErr := DB.Ping()
 	if pingErr != nil {
         log.Fatal(pingErr)
