@@ -4,17 +4,20 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import CommandHandler from './handlers/CommandHandler.js';
 import BotCommand from './core/BotCommand.js';
+import ServerConnector from './services/ServerConnector.js';
 
 export class Bot extends Client {
     private eventHandler: EventHandler;
     private commandHandler: CommandHandler;
+    public readonly connector: ServerConnector;
 
-    constructor() {
+    constructor(serverUrl: string) {
         super({
             intents: [GatewayIntentBits.Guilds],
         });
         this.eventHandler = new EventHandler(this);
         this.commandHandler = new CommandHandler(this);
+        this.connector = new ServerConnector(serverUrl);
     }
 
     /**
