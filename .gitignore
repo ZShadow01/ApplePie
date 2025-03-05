@@ -6,5 +6,6 @@
 *.bin
 
 # Ignore dependency directories
+bin/
 dist/
 node_modules/
