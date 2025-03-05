@@ -8,11 +8,12 @@ import (
 func main() {
 	config := LoadConfig()
 
+	// Create a new server router
 	server := gin.Default()
 
 	// Register the server routes
 	routes.RegisterPlayersRoutes(server)
 
 	// Run the server
-	server.Run("localhost:" + config.ServerPort)
+	server.Run(config.Host + ":" + config.Port)
 }
