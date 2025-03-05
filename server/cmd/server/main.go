@@ -19,8 +19,10 @@ func main() {
 	// Create a new server router
 	server := gin.Default()
 
+	apiRoute := server.Group("/api")
+
 	// Register the server routes
-	routes.RegisterPlayersRoutes(server)
+	routes.RegisterPlayersRoutes(apiRoute)
 
 	// Run the server
 	server.Run(config.Host + ":" + config.Port)

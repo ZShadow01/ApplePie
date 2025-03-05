@@ -1,13 +1,21 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/ZShadow01/ApplePie/server/internal/repository"
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterPlayersRoutes(r *gin.Engine) {
+
+type registerRequest struct {
+	DiscordID 	string `json:"discordID"`
+	Username 	string `json:"username"`
+}
+
+
+func RegisterPlayersRoutes(r *gin.RouterGroup) {
 	playersRoutes := r.Group("/players")
     {
         playersRoutes.GET("/player/:id", func(c *gin.Context) {
@@ -24,17 +32,21 @@ func RegisterPlayersRoutes(r *gin.Engine) {
         })
 
 		playersRoutes.POST("/register", func(c *gin.Context) {
-			// TODO: Yet to be implemented
-			c.JSON(http.StatusOK, gin.H{})
+			var req registerRequest
 
-			// err := repository.CreatePlayer("521408201908944907", "NO")
-			// if err != nil {
-			// 	fmt.Println(err.Error())
-			// 	c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register player"})
-            //     return
-			// }
+			if err := c.ShouldBindJSON(&req); err != nil {
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+            }
 
-			// c.JSON(http.StatusOK, gin.H{"message": "Player registered successfully"})
+			err := repository.CreatePlayer(req.DiscordID, req.Username)
+			if err != nil {
+				fmt.Println(err.Error())
+				c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register player"})
+                return
+			}
+
+			c.JSON(http.StatusOK, gin.H{"message": "Player registered successfully"})
         })
     }
 }
