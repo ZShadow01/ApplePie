@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"log"
@@ -12,7 +12,16 @@ type ServerConfig struct {
 	Host string
 }
 
-func LoadConfig() (*ServerConfig) {
+
+type DatabaseConfig struct {
+	User 			string
+	Password 		string
+	Host        	string
+	DatabaseName 	string
+}
+
+
+func LoadConfig() (*ServerConfig, *DatabaseConfig) {
 	// Load configuration from a file or environment variables
 	err := godotenv.Load(".env")
 
@@ -27,5 +36,10 @@ func LoadConfig() (*ServerConfig) {
 		port = "8080"  // Default port
 	}
 
-	return &ServerConfig{Port: port, Host: host}
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbName := os.Getenv("DB_NAME")
+
+	return &ServerConfig{Port: port, Host: host}, &DatabaseConfig{User: dbUser, Password: dbPassword, Host: dbHost, DatabaseName: dbName}
 }

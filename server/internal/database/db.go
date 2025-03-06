@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/ZShadow01/ApplePie/server/internal/config"
 	"github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
@@ -32,9 +33,17 @@ func loadConfig() *mysql.Config {
 	}
 }
 
-func ConnectDB() {
+func ConnectDB(cfg *config.DatabaseConfig) {
 	// Load the database configuration
-	config := loadConfig()
+	config := mysql.Config{
+		User: cfg.User,
+		Passwd: cfg.Password,
+        Net: "tcp",
+        Addr: cfg.Host,
+        DBName: cfg.DatabaseName,
+        AllowNativePasswords: true,
+		ParseTime: true,
+	}
 
 	// Connect to the database
 	var err error

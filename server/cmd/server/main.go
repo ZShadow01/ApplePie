@@ -1,21 +1,19 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/ZShadow01/ApplePie/server/internal/config"
 	"github.com/ZShadow01/ApplePie/server/internal/database"
 	"github.com/ZShadow01/ApplePie/server/internal/routes"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	/* Initialize the database connection */
-	database.ConnectDB()
-
-	/* Create the server */
 	// Load the server configuration from the .env file
-	config := LoadConfig()
-	fmt.Println(config)
+	serverConfig, databaseConfig := config.LoadConfig()
+	
+	/* Initialize the database connection */
+	database.ConnectDB(databaseConfig)
+
 	// Create a new server router
 	server := gin.Default()
 
@@ -25,5 +23,5 @@ func main() {
 	routes.RegisterPlayersRoutes(apiRoute)
 
 	// Run the server
-	server.Run(config.Host + ":" + config.Port)
+	server.Run(serverConfig.Host + ":" + serverConfig.Port)
 }
