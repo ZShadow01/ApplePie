@@ -1,5 +1,6 @@
 import PlayerService from './PlayerService.js';
-import ConnectorError from '../errors/ConnectorError.js';
+// import ConnectorError from '../errors/ConnectorError.js';
+import HttpError from '../errors/http/HttpError.js';
 
 export default class ServerConnector {
     public readonly players: PlayerService;
@@ -9,11 +10,22 @@ export default class ServerConnector {
     }
 
     public static async fetch(url: string, init?: RequestInit) {
-        const res = await fetch(url, init);
+        let res;
+
+        try {
+            res = await fetch(url, init);
+        } catch (err) {
+            throw new HttpError(
+                'Fetch failed: Server might be offline or unreachable',
+                err
+            );
+        }
+
         const json = await res.json();
 
-        if ('error' in json) {
-            throw new ConnectorError(json['error'].message, json['error'].code);
+        if (!res.ok) {
+            throw new HttpError('The server returned an error', json);
+            // throw new ConnectorError(json['error'].message, json['error'].code);
         }
 
         return json;
