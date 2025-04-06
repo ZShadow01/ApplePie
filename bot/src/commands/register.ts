@@ -1,7 +1,11 @@
-import BotCommand from '../core/BotCommand.js';
-import { APIEmbed, SlashCommandBuilder } from 'discord.js';
+import BotCommand from 'core/BotCommand';
+import {
+    APIEmbed,
+    ChatInputCommandInteraction,
+    SlashCommandBuilder,
+} from 'discord.js';
 import embedconfig from '../../config/embedconfig.json' with { type: 'json' };
-import { Bot } from 'Bot.js';
+import { Bot } from 'src/Bot';
 
 export default new BotCommand(
     new SlashCommandBuilder()
@@ -13,7 +17,7 @@ export default new BotCommand(
                 .setDescription('Your unique username')
                 .setRequired(true)
         ),
-    async (interaction) => {
+    async (interaction: ChatInputCommandInteraction) => {
         const bot: Bot = interaction.client as Bot;
         const username: string = interaction.options.getString('username')!;
 

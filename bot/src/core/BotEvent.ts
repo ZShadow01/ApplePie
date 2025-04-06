@@ -1,4 +1,4 @@
-import BotEventOptions from './BotEventOptions.js';
+import BotEventOptions from './BotEventOptions';
 
 export default class BotEvent {
     private name: string;
