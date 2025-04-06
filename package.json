@@ -2,7 +2,6 @@
     "name": "applepie",
     "version": "1.0.0",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "bot:build": "cd bot && npm run build",
         "bot:start": "cd bot && npm start",

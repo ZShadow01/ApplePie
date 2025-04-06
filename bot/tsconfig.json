@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "target": "ES2024",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "baseUrl": "src",
+        "resolveJsonModule": true,
+
+        "declaration": true,
+        "sourceMap": true,
+        "removeComments": true,
+        "outDir": "dist",
+        "newLine": "lf",
+
+        // "isolatedModules": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "strict": true,
+        "noImplicitAny": true,
+        "strictFunctionTypes": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "allowUnusedLabels": true,
+
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
+
+        // "plugins": [{ "transform": "typescript-transform-paths" }]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
