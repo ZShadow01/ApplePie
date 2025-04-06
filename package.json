@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "bot:build": "cd bot && npm run build",
-        "bot:start": "cd bot && npm start",
-        "bot:deploy": "cd bot && npm run deploy"
+        "bot:build": "cd apps/bot && npm run build",
+        "bot:start": "cd apps/bot && npm start",
+        "bot:deploy": "cd apps/bot && npm run deploy"
     },
     "keywords": [],
     "author": "",
