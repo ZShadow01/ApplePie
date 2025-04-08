@@ -1,0 +1,8 @@
+CREATE TABLE players (
+    uuid BINARY(16) PRIMARY KEY,
+    discord_id BIGINT UNSIGNED UNIQUE,
+    username VARCHAR(24) UNIQUE NOT NULL,
+    total_games INTEGER DEFAULT 0,
+    wins INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
