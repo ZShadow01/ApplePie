@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js';
 import BotCommand from '../core/bot-command.js';
 import { registerPlayer } from '../services/player-service.js';
+import NameTakenError from '../errors/name-taken-error.js';
+import AlreadyRegisteredError from '../errors/already-exists-error.js';
 
 export default {
     data: new SlashCommandBuilder()
@@ -16,8 +18,27 @@ export default {
     async execute(interaction) {
         const username = interaction.options.getString('username')!;
 
-        await registerPlayer(interaction.user.id, username);
+        const embed = {
+            title: 'Successfully registered',
+            description: `You are now registered as '${username}'`,
+            color: 0x00ff00,
+        };
 
-        await interaction.reply('Register');
+        try {
+            await registerPlayer(interaction.user.id, username);
+        } catch (err) {
+            if (err instanceof NameTakenError) {
+                embed.title = 'Username already taken';
+            } else if (err instanceof AlreadyRegisteredError) {
+                embed.title = 'User already registered';
+            } else {
+                embed.title = 'Uh oh, something unexpected happened';
+            }
+
+            embed.description = (err as Error).message;
+            embed.color = 0xff0000;
+        }
+
+        await interaction.reply({ embeds: [embed] });
     },
 } as BotCommand;
