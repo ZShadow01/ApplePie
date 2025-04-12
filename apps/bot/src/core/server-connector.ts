@@ -7,7 +7,10 @@ export default class ServerConnector {
         // TODO: websocket/socket.io connection to the server
     }
 
-    static async request(url: string, options?: RequestInit) {
+    static async request(
+        url: string,
+        options?: RequestInit
+    ): Promise<Record<string, unknown>> {
         let res;
 
         try {
@@ -23,7 +26,7 @@ export default class ServerConnector {
         const json = await res.json();
 
         if (!res.ok) {
-            throw new APIError(json['message'], json['code']);
+            throw new APIError(json['message'], json['code'], json['details']);
         }
 
         return json;
