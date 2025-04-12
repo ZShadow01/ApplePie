@@ -5,7 +5,8 @@
     "scripts": {
         "bot:build": "cd apps/bot && npm run build",
         "bot:start": "cd apps/bot && npm start",
-        "bot:deploy": "cd apps/bot && npm run deploy"
+        "bot:deploy": "cd apps/bot && npm run deploy",
+        "lint": "eslint --fix"
     },
     "keywords": [],
     "author": "",

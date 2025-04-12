@@ -1,10 +1,11 @@
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 
 export default defineConfig([
+    globalIgnores(['./**/dist', './**/config']),
     { files: ['**/*.{js,mjs,cjs,ts}'] },
     {
         files: ['**/*.{js,mjs,cjs,ts}'],
