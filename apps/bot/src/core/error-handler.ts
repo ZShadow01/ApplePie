@@ -4,6 +4,7 @@ import {
     InteractionReplyOptions,
 } from 'discord.js';
 import BaseError from '../errors/base-error.js';
+import HttpError from '../errors/http-error.js';
 
 export default class ErrorHandler {
     static async handle(
@@ -21,13 +22,22 @@ export default class ErrorHandler {
             }
         };
 
+        if (err instanceof HttpError) {
+            return await reply({
+                content: err.message,
+                flags: MessageFlags.Ephemeral,
+            });
+        }
+
         if (err instanceof BaseError) {
-            await reply({
+            console.error(err);
+            return await reply({
                 content: 'Breh',
                 flags: MessageFlags.Ephemeral,
             });
-            return;
         }
+
+        console.error(err);
 
         await reply({
             content:
